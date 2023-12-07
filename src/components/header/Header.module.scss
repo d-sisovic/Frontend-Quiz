@@ -1,4 +1,5 @@
 @use "../../styles/variables";
+@use "../../styles/breakpoints";
 
 .container {
     display: flex;
@@ -14,5 +15,37 @@
         display: inline-flex;
         color: variables.$dark-navy;
         font-family: "Rubik-Medium";
+    }
+}
+
+@include breakpoints.mq(tablet) {
+    .container {
+        padding: 5.4rem 6.4rem 6.4rem 6.4rem;
+
+        &--quiz {
+            padding-top: 4rem;
+            padding-bottom: 4.9rem;  
+        }
+
+        .header {
+            gap: 2.4rem;
+            font-size: 2.8rem;
+
+            img {
+                width: 5.6rem;
+                height: 5.6rem;
+            }
+        }
+    }
+}
+
+@include breakpoints.mq(desktop) {
+    .container {
+        padding: 9.7rem 14rem 9.9rem 14rem;
+
+        &--quiz {
+            padding-top: 8.3rem;
+            padding-bottom: 8.5rem;  
+        }
     }
 }

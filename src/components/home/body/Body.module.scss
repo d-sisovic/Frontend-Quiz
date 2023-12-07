@@ -1,5 +1,19 @@
+@use "../../../styles/breakpoints";
+
 .container {
     &__subtitle {
         margin-top: 1.6rem;
+    }
+}
+
+@include breakpoints.mq(desktop) {
+    .container {
+        display: flex;
+        align-items: flex-start;
+        justify-content: space-between;
+
+        &__subtitle {
+            margin-top: 4.8rem;
+        }
     }
 }

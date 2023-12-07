@@ -1,4 +1,5 @@
 @use "../../styles/variables";
+@use "../../styles/breakpoints";
 
 .container {
     &__question {
@@ -6,7 +7,61 @@
         line-height: 120%;
         margin-top: 1.2rem;
         margin-bottom: 2.4rem;
-        font-weight: "Rubik-Medium";
+        font-family: "Rubik-Medium";
         color: variables.$dark-navy;
+    }
+}
+
+.button {
+    width: 100%;
+    left: 2.4rem;
+    position: relative;
+    max-width: calc(100% - 4.8rem);
+}
+
+@include breakpoints.mq(tablet) {
+    .container {
+        &__question {
+            font-size: 3.6rem;
+            margin-top: 2.7rem;
+            margin-bottom: 4rem;
+        }
+    }
+
+    .button {
+        left: 6.4rem;
+        max-width: calc(100% - 12.8rem);
+    }
+}
+
+@include breakpoints.mq(desktop) {
+    .container {
+        display: flex;
+        justify-content: space-between;
+
+        &__question {
+            display: flex;
+            margin-bottom: 0;
+            max-width: 46.5rem;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+    }
+
+    .submit {
+        display: flex;
+        align-items: flex-end;
+        flex-direction: column;
+
+        >* {
+            width: 56.4rem;
+        }
+
+        div,
+        .button {
+            left: unset;
+            right: 14rem;
+            position: relative;
+        }
     }
 }

@@ -1,6 +1,23 @@
+@use "../../../styles/breakpoints";
+
 .container {
     gap: 1.2rem;
+    width: 100%;
     display: flex;
     margin-top: 4rem;
     flex-direction: column;
+}
+
+@include breakpoints.mq(tablet) {
+    .container {
+        gap: 2.4rem;
+        margin-top: 6.4rem;
+    }
+}
+
+@include breakpoints.mq(desktop) {
+    .container {
+        margin-top: 0;
+        width: 56.4rem;
+    }
 }

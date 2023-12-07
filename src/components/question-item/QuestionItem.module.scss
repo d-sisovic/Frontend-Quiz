@@ -1,4 +1,5 @@
 @use "../../styles/variables";
+@use "../../styles/breakpoints";
 
 .container {
     gap: 1.6rem;
@@ -21,7 +22,7 @@
         display: flex;
         align-items: center;
         justify-content: space-between;
-        
+
         img {
             width: 3.2rem;
             height: 3.2rem;
@@ -36,7 +37,7 @@
             background-color: variables.$purple !important;
         }
     }
-    
+
     &--correct {
         outline: 3px solid variables.$green;
 
@@ -62,7 +63,7 @@
         }
     }
 
-    > img,
+    >img,
     .img {
         width: 4rem;
         height: 4rem;
@@ -79,5 +80,40 @@
         color: variables.$grey-navy;
         background: variables.$light-grey;
         padding: 1.1rem 1.3rem 1.1rem 1.4rem;
+    }
+}
+
+@include breakpoints.mq(tablet) {
+    .container {
+        gap: 3.2rem;
+        font-size: 2.8rem;
+        border-radius: 2.4rem;
+
+        &__text {
+            gap: 3.2rem;
+
+            img {
+                width: 4rem;
+                height: 4rem;
+            }
+        }
+
+        >img,
+        .img {
+            width: 5.6rem;
+            height: 5.6rem;
+        }
+
+        .img {
+            min-width: 5.6rem;
+            font-size: 2.8rem;
+            border-radius: 0.8rem;
+        }
+    }
+}
+
+@include breakpoints.mq(desktop) {
+    .container {
+        padding: 2rem;
     }
 }

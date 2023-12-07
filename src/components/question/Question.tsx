@@ -93,19 +93,27 @@ const Question = ({ handleShowResult }: { handleShowResult: (correctAnswers: num
         <Header imgName={selectedQuizData?.icon} title={selectedQuizData?.title} />
 
         <div className={`container ${styles.container}`}>
-            <p className="italic__title">Question {questionState.questionCount + 1} of {selectedQuizData?.questions.length}</p>
+            <div className={styles['container__question']}>
+                <div>
+                    <p className="italic__title">Question {questionState.questionCount + 1} of {selectedQuizData?.questions.length}</p>
 
-            <h1 className={styles['container__question']}>{selectedQuizData?.questions[questionState.questionCount].question}</h1>
+                    <h1 className={styles['container__question']}>{selectedQuizData?.questions[questionState.questionCount].question}</h1>
+                </div>
 
-            <Progressbar width={calculateProgressbarWidth(selectedQuizData, questionState.questionCount)} />
+                <Progressbar width={calculateProgressbarWidth(selectedQuizData, questionState.questionCount)} />
+            </div>
 
-            <QuestionContainer>
-                {selectedQuizData?.questions[questionState.questionCount].options.map((option, index) =>
-                    <QuestionItem key={option} text={option} selected={questionState.selectedAnswer.value === option}
-                        label={getQuestionLetter(index)} answer={questionState.answer} onSelectQuestion={() => handleSelectQuestion(option)} />)}
+            <div>
+                <QuestionContainer>
+                    {selectedQuizData?.questions[questionState.questionCount].options.map((option, index) =>
+                        <QuestionItem key={option} text={option} selected={questionState.selectedAnswer.value === option}
+                            label={getQuestionLetter(index)} answer={questionState.answer} onSelectQuestion={() => handleSelectQuestion(option)} />)}
+                </QuestionContainer>
+            </div>
+        </div>
 
-                <button className="button" onClick={handleSubmitQuestion} disabled={questionState.disabled}>Submit Answer</button>
-            </QuestionContainer>
+        <div className={styles.submit}>
+            <button className={`button ${styles.button}`} onClick={handleSubmitQuestion} disabled={questionState.disabled}>Submit Answer</button>
 
             {questionState.selectedAnswer.disabled && questionState.isTouched && <div className="error__container">
                 <img src={errorImage} alt="error" />

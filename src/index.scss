@@ -56,6 +56,7 @@ body {
     cursor: pointer;
     font-size: 1.8rem;
     line-height: 100%;
+    margin-top: 1.2rem;
     border-radius: 1.2rem;
     font-family: "Rubik-Medium";
     color: variables.$pure-white;
@@ -65,5 +66,43 @@ body {
     &:hover,
     &:disabled {
         background: linear-gradient(0deg, rgba(255, 255, 255, 0.50) 0%, rgba(255, 255, 255, 0.50) 100%), variables.$purple;
+    }
+}
+
+@include breakpoints.mq(tablet) {
+    .container {
+        padding: 0 6.4rem 0 6.4rem;
+    }
+
+    .main__title {
+        font-size: 6.4rem;
+    }
+
+    .italic__title {
+        font-size: 2rem;
+    }
+
+    .button {
+        height: 9.2rem;
+        padding: 3.2rem;
+        margin-top: 3.2rem;
+        font-size: 2.8rem;
+        border-radius: 2.4rem;
+    }
+
+    .error__container {
+        font-size: 2.4rem;
+        margin-top: 3.2rem;
+    
+        img {
+            width: 4rem;
+            height: 4rem;
+        }
+    }
+}
+
+@include breakpoints.mq(desktop) {
+    .container {
+        padding: 0 14rem 0 14rem;
     }
 }
