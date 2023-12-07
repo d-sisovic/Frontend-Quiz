@@ -5,6 +5,7 @@ import ReactDOM from 'react-dom/client';
 import Quiz from './components/quiz/Quiz.tsx';
 import Home from './components/home/Home.tsx';
 import QuizContext from './context/QuizContext.tsx';
+import NotFound from './components/not-found/NotFound.tsx';
 import { RoutePaths } from './ts/enums/route-paths.enum.ts';
 import { RouterProvider, createHashRouter } from 'react-router-dom';
 import PrivateRoute from './components/private-route/PrivateRoute.tsx';
@@ -21,7 +22,8 @@ const routes = [
         path: RoutePaths.QUIZ + '/:title',
         element: <QuizContext><PrivateRoute component={<Quiz />} /></QuizContext>
       }
-    ]
+    ],
+    errorElement: <NotFound />
   }
 ];
 
