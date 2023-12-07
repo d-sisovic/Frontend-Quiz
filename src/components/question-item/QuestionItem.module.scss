@@ -1,0 +1,83 @@
+@use "../../styles/variables";
+
+.container {
+    gap: 1.6rem;
+    display: flex;
+    cursor: pointer;
+    padding: 1.2rem;
+    font-weight: 500;
+    font-size: 1.8rem;
+    line-height: 100%;
+    align-items: center;
+    border-radius: 1.2rem;
+    font-family: "Rubik-Medium";
+    color: variables.$dark-navy;
+    background: variables.$pure-white;
+    box-shadow: 0px 16px 40px 0px rgba(143, 160, 193, 0.14);
+
+    &__text {
+        gap: 1.6rem;
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        
+        img {
+            width: 3.2rem;
+            height: 3.2rem;
+        }
+    }
+
+    &--selected {
+        outline: 3px solid variables.$purple;
+
+        .img {
+            color: variables.$pure-white !important;
+            background-color: variables.$purple !important;
+        }
+    }
+    
+    &--correct {
+        outline: 3px solid variables.$green;
+
+        .img {
+            color: variables.$pure-white !important;
+            background-color: variables.$green !important;
+        }
+    }
+
+    &--incorrect {
+        outline: 3px solid variables.$red;
+
+        .img {
+            color: variables.$pure-white !important;
+            background-color: variables.$red !important;
+        }
+    }
+
+    &:hover {
+        .img {
+            color: variables.$purple;
+            background-color: #F6E7FF;
+        }
+    }
+
+    > img,
+    .img {
+        width: 4rem;
+        height: 4rem;
+    }
+
+    .img {
+        min-width: 4rem;
+        font-size: 1.8rem;
+        line-height: 100%;
+        text-align: center;
+        display: inline-block;
+        border-radius: 0.4rem;
+        font-family: "Rubik-Medium";
+        color: variables.$grey-navy;
+        background: variables.$light-grey;
+        padding: 1.1rem 1.3rem 1.1rem 1.4rem;
+    }
+}

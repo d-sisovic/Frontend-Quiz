@@ -1,0 +1,51 @@
+@use "../../../styles/variables";
+
+.container {
+    gap: 0.8rem;
+    align-items: center;
+    display: inline-flex;
+
+    img {
+        width: 1.6rem;
+        height: 1.6rem;
+    }
+
+    .switcher {
+        height: 2rem;
+        width: 3.2rem;
+        position: relative;
+        display: inline-block;
+    
+        input[type="checkbox"] {
+            display: none;
+    
+            &:checked+.switcher__circle::before {
+                left: initial;
+                transform: translateX(100%);
+            }
+        }
+    
+        &__circle {
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            padding: 0.4rem;
+            cursor: pointer;
+            position: absolute;
+            border-radius: 999px;
+            background-color: variables.$purple;
+    
+            &::before {
+                content: "";
+                left: 0.4rem;
+                width: 1.2rem;
+                height: 1.2rem;
+                position: absolute;
+                border-radius: 50%;
+                transition: transform 0.5s ease;
+                background-color: variables.$pure-white;
+            }
+        }
+    }
+}

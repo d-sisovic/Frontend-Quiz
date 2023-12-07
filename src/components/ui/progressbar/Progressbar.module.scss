@@ -1,0 +1,14 @@
+@use "../../../styles/variables";
+
+.container {
+    height: 1.6rem;
+    padding: 0.4rem;
+    border-radius: 999px;
+    background: variables.$pure-white;
+
+    .progress {
+        height: 0.8rem;
+        border-radius: 104px;
+        background: variables.$purple;
+    }
+}
