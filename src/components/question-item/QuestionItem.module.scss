@@ -56,7 +56,7 @@
         }
     }
 
-    &:hover {
+    &:not(.container--readonly):hover {
         .img {
             color: variables.$purple;
             background-color: #F6E7FF;

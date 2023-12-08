@@ -1,6 +1,6 @@
 import { useState } from "react";
 import Result from "../result/Result";
-import Question from "../question/Question";
+import Question from "../questions/Questions";
 import { IQuizState } from "./ts/models/quiz-state.model";
 import { IQuizItem } from "../../ts/models/quiz-item.model";
 

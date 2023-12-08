@@ -1,6 +1,6 @@
 import Header from '../header/Header';
 import { useState, useEffect } from 'react';
-import styles from './Question.module.scss';
+import styles from './Questions.module.scss';
 import { useParams } from 'react-router-dom';
 import Progressbar from '../ui/progressbar/Progressbar';
 import QuestionItem from '../question-item/QuestionItem';
@@ -40,7 +40,7 @@ const initialState = {
 
 let correctAnswers = 0;
 
-const Question = ({ handleShowResult }: { handleShowResult: (correctAnswers: number, totalQuestions: number, selectedQuizData: IQuizItem) => void }) => {
+const Questions = ({ handleShowResult }: { handleShowResult: (correctAnswers: number, totalQuestions: number, selectedQuizData: IQuizItem) => void }) => {
     const { title } = useParams();
     const { quizData } = useContextData();
 
@@ -128,4 +128,4 @@ const Question = ({ handleShowResult }: { handleShowResult: (correctAnswers: num
     </>;
 };
 
-export default Question;
+export default Questions;

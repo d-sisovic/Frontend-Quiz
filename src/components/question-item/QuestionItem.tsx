@@ -5,12 +5,15 @@ import iconIncorrectImg from '../../assets/images/icon-incorrect.svg';
 
 const QuestionItem = ({ text, imgName, label, selected, answer, onSelectQuestion }: IQuestionItem) => {
     const onClick = () => onSelectQuestion(text);
-    const selectedStyle = selected ? styles['container--selected'] : '';
+
     const showCorrectIcon = answer && answer === text && !selected;
+
+    const readonlyStyle = answer ? styles['container--readonly'] : '';
+    const selectedStyle = selected ? styles['container--selected'] : '';
     const correctStyle = answer && answer === text && selected ? styles['container--correct'] : '';
     const incorrectStyle = answer && answer !== text && selected ? styles['container--incorrect'] : '';
 
-    return <div className={`${styles.container} ${selectedStyle} ${correctStyle} ${incorrectStyle}`} onClick={onClick}>
+    return <div className={`${styles.container} ${selectedStyle} ${correctStyle} ${incorrectStyle} ${readonlyStyle}`} onClick={onClick}>
         {imgName && <img src={`src/assets/images/${imgName}.svg`} alt="question image" />}
 
         {!imgName && <span className={styles.img}>{label}</span>}
