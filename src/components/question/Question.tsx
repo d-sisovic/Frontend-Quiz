@@ -47,6 +47,8 @@ const Question = ({ handleShowResult }: { handleShowResult: (correctAnswers: num
     const [questionState, setState] = useState<IQuestionState>(initialState);
     const [selectedQuizData, setSelectedQuizData] = useState<IQuizItem | null>(null);
 
+    const isLastQuestion = questionState.questionCount + 1 === (selectedQuizData?.questions.length || 10);
+
     useEffect(() => {
         const selectedQuizData = (quizData as IQuizResponse).quizzes.find(item => item.title === title) as IQuizItem;
 
@@ -59,24 +61,7 @@ const Question = ({ handleShowResult }: { handleShowResult: (correctAnswers: num
         setState(previous => ({ ...previous, selectedAnswer: { value: answer, disabled: false } }));
     };
 
-    const handleSubmitDelay = (answer: string) => {
-        setTimeout(() => {
-            if (answer === questionState.selectedAnswer.value) {
-                correctAnswers += 1;
-            }
-
-            const questionsLength = (selectedQuizData as IQuizItem).questions.length;
-
-            if (questionState.questionCount === questionsLength - 1) {
-                handleShowResult(correctAnswers, questionsLength, selectedQuizData as IQuizItem);
-                return;
-            }
-
-            setState(previous => ({ ...initialState, questionCount: previous.questionCount + 1 }));
-        }, 2000);
-    };
-
-    const handleSubmitQuestion = () => {
+    const onSubmitQuestion = () => {
         if (questionState.selectedAnswer.value === '') {
             setState(previous => ({ ...previous, isTouched: true }));
             return;
@@ -86,8 +71,23 @@ const Question = ({ handleShowResult }: { handleShowResult: (correctAnswers: num
 
         setState(previous => ({ ...previous, disabled: true, answer }));
 
-        handleSubmitDelay(answer);
+        if (answer === questionState.selectedAnswer.value) {
+            correctAnswers += 1;
+        }
     };
+
+    const onShowNextQuestion = () => setState(previous => {
+        // eslint-disable-next-line @typescript-eslint/no-unused-vars
+        const { questionCount, ...rest } = initialState;
+
+        return { ...rest, questionCount: previous.questionCount + 1 };
+    });
+
+    const onShowResults = () => {
+        const questionsLength = (selectedQuizData as IQuizItem).questions.length;
+
+        handleShowResult(correctAnswers, questionsLength, selectedQuizData as IQuizItem);
+    }
 
     return <>
         <Header imgName={selectedQuizData?.icon} title={selectedQuizData?.title} />
@@ -113,7 +113,11 @@ const Question = ({ handleShowResult }: { handleShowResult: (correctAnswers: num
         </div>
 
         <div className={styles.submit}>
-            <button className={`button ${styles.button}`} onClick={handleSubmitQuestion} disabled={questionState.disabled}>Submit Answer</button>
+            {!questionState.disabled && <button className={`button ${styles.button}`} onClick={onSubmitQuestion}>Submit Answer</button>}
+
+            {questionState.disabled && !isLastQuestion && <button className={`button ${styles.button}`} onClick={onShowNextQuestion}>Next Question</button>}
+
+            {questionState.disabled && isLastQuestion && <button className={`button ${styles.button}`} onClick={onShowResults}>Show Results</button>}
 
             {questionState.selectedAnswer.disabled && questionState.isTouched && <div className="error__container">
                 <img src={errorImage} alt="error" />
