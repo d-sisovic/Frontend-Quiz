@@ -4,7 +4,7 @@
     height: 1.6rem;
     padding: 0.4rem;
     border-radius: 999px;
-    background: variables.$pure-white;
+    background: var(--question-item-bg);
 
     .progress {
         height: 0.8rem;

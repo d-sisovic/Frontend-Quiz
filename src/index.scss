@@ -3,8 +3,33 @@
 @use "./styles/variables";
 @use "./styles/breakpoints";
 
+:root {
+    --color: #313E51;
+    --background-color: #FFF;
+    --question-item-bg: #FFF;
+    --italic-title-color: #626C7F;
+    --mobile-bg: url('./assets/images/pattern-background-mobile-light.svg');
+    --tablet-bg: url('./assets/images/pattern-background-tablet-light.svg');
+    --desktop-bg: url('./assets/images/pattern-background-desktop-light.svg');
+}
+
+[data-theme="dark"] {
+    --color: #FFF;
+    --background-color: #313E51;
+    --question-item-bg: #3B4D66;
+    --italic-title-color: #ABC1E1;
+    --mobile-bg: url('./assets/images/pattern-background-mobile-dark.svg');
+    --tablet-bg: url('./assets/images/pattern-background-tablet-dark.svg');
+    --desktop-bg: url('./assets/images/pattern-background-desktop-dark.svg');
+}
+
 body {
     font-family: "Rubik-Regular";
+    background-color: var(--background-color);
+
+    * {
+        color: var(--color);
+    }
 }
 
 .container {
@@ -19,7 +44,7 @@ body {
     font-size: 4rem;
     font-weight: 300;
     line-height: 100%;
-    color: variables.$dark-navy;
+    color: var(--color);
 
     &--500 {
         font-family: "Rubik-Medium";
@@ -29,8 +54,8 @@ body {
 .italic__title {
     font-size: 1.4rem;
     line-height: 150%;
-    color: variables.$grey-navy;
     font-family: "Rubik-Italic";
+    color: var(--italic-title-color);
 }
 
 .error__container {

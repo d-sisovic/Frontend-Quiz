@@ -93,11 +93,11 @@ const Questions = ({ handleShowResult }: { handleShowResult: (correctAnswers: nu
         <Header imgName={selectedQuizData?.icon} title={selectedQuizData?.title} />
 
         <div className={`container ${styles.container}`}>
-            <div className={styles['container__question']}>
+            <div className={styles.question}>
                 <div>
                     <p className="italic__title">Question {questionState.questionCount + 1} of {selectedQuizData?.questions.length}</p>
 
-                    <h1 className={styles['container__question']}>{selectedQuizData?.questions[questionState.questionCount].question}</h1>
+                    <h1 className={styles['question__heading']}>{selectedQuizData?.questions[questionState.questionCount].question}</h1>
                 </div>
 
                 <Progressbar width={calculateProgressbarWidth(selectedQuizData, questionState.questionCount)} />

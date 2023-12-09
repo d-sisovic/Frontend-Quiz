@@ -2,13 +2,13 @@
 @use "../../styles/breakpoints";
 
 .container {
-    &__question {
-        font-size: 2rem;
-        line-height: 120%;
-        margin-top: 1.2rem;
-        margin-bottom: 2.4rem;
-        font-family: "Rubik-Medium";
-        color: variables.$dark-navy;
+    .question {
+        &__heading {
+            margin-top: 1.2rem;
+            color: var(--color);
+            margin-bottom: 2.4rem;
+            font-family: "Rubik-Medium";
+        }
     }
 }
 
@@ -21,10 +21,12 @@
 
 @include breakpoints.mq(tablet) {
     .container {
-        &__question {
-            font-size: 3.6rem;
-            margin-top: 2.7rem;
-            margin-bottom: 4rem;
+        .question {
+            &__heading {
+                font-size: 3.6rem;
+                margin-top: 2.7rem;
+                margin-bottom: 4rem;
+            }
         }
     }
 
@@ -39,12 +41,15 @@
         display: flex;
         justify-content: space-between;
 
-        &__question {
+        .question {
             display: flex;
-            margin-bottom: 0;
             max-width: 46.5rem;
             flex-direction: column;
             justify-content: space-between;
+
+            &__heading {
+                margin-bottom: 0;
+            }
         }
     }
 

@@ -4,17 +4,17 @@
     height: 100vh;
     background-size: cover;
     background-repeat: no-repeat;
-    background-image: url('./assets/images/pattern-background-mobile-light.svg');
+    background-image: var(--mobile-bg);
 }
 
 @include breakpoints.mq(tablet) {
     .container {
-        background-image: url('./assets/images/pattern-background-tablet-light.svg');
+        background-image: var(--tablet-bg);
     }
 }
 
 @include breakpoints.mq(desktop) {
     .container {
-        background-image: url('./assets/images/pattern-background-desktop-light.svg');
+        background-image: var(--desktop-bg);
     }
 }

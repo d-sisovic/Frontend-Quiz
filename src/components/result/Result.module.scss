@@ -9,7 +9,7 @@
     align-items: center;
     border-radius: 1.2rem;
     flex-direction: column;
-    background: variables.$pure-white;
+    background: var(--question-item-bg);
     box-shadow: 0px 16px 40px 0px rgba(143, 160, 193, 0.14);
 
     &__topic {
@@ -32,14 +32,14 @@
         &__correct {
             font-size: 8.8rem;
             line-height: 100%;
-            color: variables.$dark-navy;
             font-family: "Rubik-Medium";
+            color: var(--color);
         }
 
         &__outof {
             font-size: 1.8rem;
             line-height: 100%;
-            color: variables.$grey-navy;
+            color: var(--italic-title-color);
         }
     }
 }
