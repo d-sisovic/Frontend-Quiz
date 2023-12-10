@@ -1,103 +1,75 @@
 import Header from '../header/Header';
-import { useState, useEffect } from 'react';
 import styles from './Questions.module.scss';
 import { useParams } from 'react-router-dom';
+import { useState, useEffect, useRef } from 'react';
 import Progressbar from '../ui/progressbar/Progressbar';
 import QuestionItem from '../question-item/QuestionItem';
 import { IQuizItem } from '../../ts/models/quiz-item.model';
 import errorImage from '../../assets/images/icon-error.svg';
 import { useContextData } from '../../context/QuizContextData';
 import { IQuestionState } from './ts/models/question-state.model';
-import { IQuizResponse } from '../../ts/models/quiz-response.model';
 import QuestionContainer from '../ui/question-container/QuestionContainer';
-
-const getQuestionLetter = (index: number) => {
-    switch (index) {
-        case 0:
-            return 'A';
-        case 1:
-            return 'B';
-        case 2:
-            return 'C';
-        case 3:
-            return 'D';
-        default:
-            return '';
-    }
-};
-
-const calculateProgressbarWidth = (selectedQuizData: IQuizItem | null, questionCount: number) => {
-    return !selectedQuizData ? '0%' : `${(((questionCount + 1) / selectedQuizData.questions.length) * 100)}%`;
-};
-
-const initialState = {
-    answer: '',
-    disabled: false,
-    isTouched: false,
-    questionCount: 0,
-    selectedAnswer: { value: '', disabled: true }
-};
-
-let correctAnswers = 0;
+import { initialQuestionItemState, calculateProgressbarWidth, getQuestionLetter } from './questions-util';
 
 const Questions = ({ handleShowResult }: { handleShowResult: (correctAnswers: number, totalQuestions: number, selectedQuizData: IQuizItem) => void }) => {
     const { title } = useParams();
     const { quizData } = useContextData();
-
-    const [questionState, setState] = useState<IQuestionState>(initialState);
+    const correctAnswersCount = useRef<number>(0);
     const [selectedQuizData, setSelectedQuizData] = useState<IQuizItem | null>(null);
-
-    const isLastQuestion = questionState.questionCount + 1 === (selectedQuizData?.questions.length || 10);
+    const [questionState, setState] = useState<IQuestionState>(initialQuestionItemState);
 
     useEffect(() => {
-        const selectedQuizData = (quizData as IQuizResponse).quizzes.find(item => item.title === title) as IQuizItem;
+        const selectedQuizData = (quizData?.quizzes || []).find(item => item.title === title) || null;
 
         setSelectedQuizData(selectedQuizData);
     }, [quizData, title]);
 
-    const handleSelectQuestion = (answer: string) => {
+    if (!selectedQuizData) { return null; }
+
+    const isLastQuestion = questionState.questionCount + 1 === selectedQuizData.questions.length;
+    const { answer, question, options } = selectedQuizData.questions[questionState.questionCount];
+
+    const handleSelectQuestion = (selectedAnswer: string) => {
         if (questionState.disabled) { return; }
 
-        setState(previous => ({ ...previous, selectedAnswer: { value: answer, disabled: false } }));
+        setState(previous => ({ ...previous, selectedAnswer }));
     };
 
     const onSubmitQuestion = () => {
-        if (questionState.selectedAnswer.value === '') {
+        if (questionState.selectedAnswer === '') {
             setState(previous => ({ ...previous, isTouched: true }));
             return;
         }
 
-        const answer = selectedQuizData?.questions[questionState.questionCount].answer as string;
-
         setState(previous => ({ ...previous, disabled: true, answer }));
 
-        if (answer === questionState.selectedAnswer.value) {
-            correctAnswers += 1;
+        if (answer === questionState.selectedAnswer) {
+            correctAnswersCount.current = correctAnswersCount.current + 1;
         }
     };
 
     const onShowNextQuestion = () => setState(previous => {
         // eslint-disable-next-line @typescript-eslint/no-unused-vars
-        const { questionCount, ...rest } = initialState;
+        const { questionCount, ...rest } = initialQuestionItemState;
 
         return { ...rest, questionCount: previous.questionCount + 1 };
     });
 
     const onShowResults = () => {
-        const questionsLength = (selectedQuizData as IQuizItem).questions.length;
+        const questionsLength = selectedQuizData.questions.length;
 
-        handleShowResult(correctAnswers, questionsLength, selectedQuizData as IQuizItem);
+        handleShowResult(correctAnswersCount.current, questionsLength, selectedQuizData);
     }
 
     return <>
-        <Header imgName={selectedQuizData?.icon} title={selectedQuizData?.title} />
+        <Header imgName={selectedQuizData.icon} title={selectedQuizData.title} />
 
         <div className={`container ${styles.container}`}>
             <div className={styles.question}>
                 <div>
-                    <p className="italic__title">Question {questionState.questionCount + 1} of {selectedQuizData?.questions.length}</p>
+                    <p className="italic__title">Question {questionState.questionCount + 1} of {selectedQuizData.questions.length}</p>
 
-                    <h1 className={styles['question__heading']}>{selectedQuizData?.questions[questionState.questionCount].question}</h1>
+                    <h1 className={styles['question__heading']}>{question}</h1>
                 </div>
 
                 <Progressbar width={calculateProgressbarWidth(selectedQuizData, questionState.questionCount)} />
@@ -105,9 +77,9 @@ const Questions = ({ handleShowResult }: { handleShowResult: (correctAnswers: nu
 
             <div>
                 <QuestionContainer>
-                    {selectedQuizData?.questions[questionState.questionCount].options.map((option, index) =>
-                        <QuestionItem key={option} text={option} selected={questionState.selectedAnswer.value === option}
-                            label={getQuestionLetter(index)} answer={questionState.answer} onSelectQuestion={() => handleSelectQuestion(option)} />)}
+                    {options.map((option, index) =>
+                        <QuestionItem key={option} text={option} questionState={questionState}
+                            label={getQuestionLetter(index)} onSelectQuestion={() => handleSelectQuestion(option)} />)}
                 </QuestionContainer>
             </div>
         </div>
@@ -119,7 +91,7 @@ const Questions = ({ handleShowResult }: { handleShowResult: (correctAnswers: nu
 
             {questionState.disabled && isLastQuestion && <button className={`button ${styles.button}`} onClick={onShowResults}>Show Results</button>}
 
-            {questionState.selectedAnswer.disabled && questionState.isTouched && <div className="error__container">
+            {questionState.isTouched && <div className="error__container">
                 <img src={errorImage} alt="error" />
 
                 <p>Please select an answer</p>

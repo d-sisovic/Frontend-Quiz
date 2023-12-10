@@ -3,5 +3,5 @@ export interface IQuestionState {
     disabled: boolean;
     isTouched: boolean;
     questionCount: number;
-    selectedAnswer: { value: string, disabled: boolean };
+    selectedAnswer: string;
 }

@@ -24,12 +24,12 @@ const Result = ({ resultData }: { resultData: IQuizState }) => {
             <div className={styles['card__wrapper']}>
                 <div className={styles.card}>
                     <div className={styles['card__topic']}>
-                        <img src={`src/assets/images/${imgName}.svg`} alt="quiz image" />
+                        <img src={`${import.meta.env.BASE_URL}/${imgName}.svg`} alt="quiz image" />
 
                         <span>{title}</span>
                     </div>
 
-                    <div className={styles['card__answers']}>
+                    <div className={styles['card__answers']} data-testid="answer">
                         <span className={styles['card__answers__correct']}>{correctAnswers}</span>
 
                         <p className={styles['card__answers__outof']}>out of {totalQuestions}</p>

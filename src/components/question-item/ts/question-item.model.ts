@@ -1,8 +1,9 @@
+import { IQuestionState } from "../../questions/ts/models/question-state.model";
+
 export interface IQuestionItem {
     label?: string;
-    answer?: string;
     imgName?: string;
-    selected?: boolean;
+    questionState?: IQuestionState;
 
     text: string;
     onSelectQuestion: (text: string) => void;

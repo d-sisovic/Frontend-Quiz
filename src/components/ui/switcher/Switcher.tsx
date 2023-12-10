@@ -7,7 +7,7 @@ import sunLightSvg from '../../../assets/images/icon-sun-light.svg';
 import moonLigthSvg from '../../../assets/images/icon-moon-light.svg';
 
 const Switcher = () => {
-    const [theme, setTheme] = useState<Theme>(Theme.DARK);
+    const [theme, setTheme] = useState<Theme>(Theme.LIGHT);
 
     const onToggle = () => {
         const newTheme = theme === Theme.DARK ? Theme.LIGHT : Theme.DARK;
@@ -25,16 +25,16 @@ const Switcher = () => {
     }, [theme]);
 
     return <div className={styles.container}>
-        {theme === Theme.LIGHT && <img src={sunDarkSvg} alt="sun" />}
-        {theme === Theme.DARK && <img src={sunLightSvg} alt="sun" />}
+        {theme === Theme.LIGHT && <img src={sunDarkSvg} alt="sun-dark" />}
+        {theme === Theme.DARK && <img src={sunLightSvg} alt="sun-light" />}
 
-        <label className={styles.switcher}>
-            <input type="checkbox" checked={theme === Theme.DARK} onChange={onToggle} />
+        <label className={styles.switcher} data-testid="label">
+            <input type="checkbox" checked={theme === Theme.DARK} onChange={onToggle} data-testid="checkbox" />
             <span className={styles['switcher__circle']} />
         </label>
 
-        {theme === Theme.LIGHT && <img src={moonDarkSvg} alt="moon" />}
-        {theme === Theme.DARK && <img src={moonLigthSvg} alt="moon" />}
+        {theme === Theme.LIGHT && <img src={moonDarkSvg} alt="moon-dark" />}
+        {theme === Theme.DARK && <img src={moonLigthSvg} alt="moon-light" />}
     </div>;
 };
 

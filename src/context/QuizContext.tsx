@@ -11,7 +11,7 @@ const QuizContext = ({ children }: { children: React.ReactNode }) => {
     useEffect(() => {
         (async () => {
             try {
-                const response = await fetch('src/assets/data.json');
+                const response = await fetch('data.json');
                 const quizData = await response.json();
 
                 setData(previousState => ({ ...previousState, quizData }));

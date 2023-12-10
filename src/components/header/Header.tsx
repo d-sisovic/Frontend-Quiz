@@ -6,12 +6,12 @@ const Header = ({ imgName, title }: IHeaderProps) => {
     return <header className={`${styles.container} ${imgName ? styles['container--quiz'] : ''}`}>
         <div className={styles.header}>
             {imgName && <>
-                <img src={`src/assets/images/${imgName}.svg`} alt="quiz image" />
+                <img src={`${import.meta.env.BASE_URL}/${imgName}.svg`} alt="quiz image" data-testid="header-img" />
 
                 <span>{title}</span>
             </>}
         </div>
-
+        
         <div>
             <Switcher />
         </div>
