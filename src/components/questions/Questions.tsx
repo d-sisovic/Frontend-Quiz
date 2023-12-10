@@ -91,7 +91,7 @@ const Questions = ({ handleShowResult }: { handleShowResult: (correctAnswers: nu
 
             {questionState.disabled && isLastQuestion && <button className={`button ${styles.button}`} onClick={onShowResults}>Show Results</button>}
 
-            {questionState.isTouched && <div className="error__container">
+            {!questionState.disabled && questionState.isTouched && <div className="error__container">
                 <img src={errorImage} alt="error" />
 
                 <p>Please select an answer</p>
