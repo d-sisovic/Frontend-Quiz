@@ -35,7 +35,6 @@ vi.mock('react-router-dom', () => ({
 describe('Questions component ', () => {
     it('renders with initial state', () => {
         const { queryByTestId } = render(<Questions handleShowResult={handleShowResult} />);
-
         const contentElement = queryByTestId('content');
 
         expect(contentElement).toBeNull();

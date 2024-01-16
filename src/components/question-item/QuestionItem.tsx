@@ -17,7 +17,7 @@ const QuestionItem = ({ text, imgName, label, questionState, onSelectQuestion }:
 
     return <div className={`${styles.container} ${selectedStyle} ${correctStyle} ${incorrectStyle} ${readonlyStyle}`}
         onClick={onClick} data-testid="question-item">
-        {imgName && <img src={`${import.meta.env.BASE_URL}/${imgName}.svg`} alt="question image" />}
+        {imgName && <img src={`${import.meta.env.BASE_URL}${imgName}.svg`} alt="question image" />}
 
         {!imgName && <span className={styles.img} data-testid="question-item-label">{label}</span>}
 

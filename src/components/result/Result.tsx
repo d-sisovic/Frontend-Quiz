@@ -24,7 +24,7 @@ const Result = ({ resultData }: { resultData: IQuizState }) => {
             <div className={styles['card__wrapper']}>
                 <div className={styles.card}>
                     <div className={styles['card__topic']}>
-                        <img src={`${import.meta.env.BASE_URL}/${imgName}.svg`} alt="quiz image" />
+                        <img src={`${import.meta.env.BASE_URL}${imgName}.svg`} alt="quiz image" />
 
                         <span>{title}</span>
                     </div>

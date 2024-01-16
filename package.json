@@ -10,7 +10,10 @@
     "preview": "vite preview",
     "test": "vitest",
     "predeploy": "npm run build",
-    "deploy": "gh-pages -d dist"
+    "deploy": "gh-pages -d dist",
+    "storybook": "storybook dev -p 6006",
+    "build-storybook": "storybook build",
+    "init-msw": "msw init public/"
   },
   "dependencies": {
     "react": "^18.2.0",
@@ -18,6 +21,15 @@
     "react-router-dom": "^6.20.1"
   },
   "devDependencies": {
+    "@storybook/addon-a11y": "^7.6.8",
+    "@storybook/addon-actions": "^7.6.8",
+    "@storybook/addon-essentials": "^7.6.8",
+    "@storybook/addon-interactions": "^7.6.8",
+    "@storybook/addon-links": "^7.6.8",
+    "@storybook/blocks": "^7.6.8",
+    "@storybook/react": "^7.6.8",
+    "@storybook/react-vite": "^7.6.8",
+    "@storybook/test": "^7.6.8",
     "@testing-library/jest-dom": "^6.1.5",
     "@testing-library/react": "^14.1.2",
     "@testing-library/user-event": "^14.5.1",
@@ -32,9 +44,13 @@
     "eslint-plugin-react-refresh": "^0.4.4",
     "gh-pages": "^6.1.0",
     "jsdom": "^23.0.1",
+    "msw": "^2.1.0",
+    "msw-storybook-addon": "^1.10.0",
     "npm": "^10.2.5",
+    "prop-types": "^15.8.1",
     "react-error-overlay": "^6.0.11",
     "sass": "^1.69.5",
+    "storybook": "^7.6.8",
     "typescript": "^5.2.2",
     "vite": "^5.0.0",
     "vitest": "^1.0.4"
